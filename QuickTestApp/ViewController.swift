@@ -7,12 +7,31 @@
 //
 
 import UIKit
+import PalBleSwift
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ScanListener {
+    func onScanResultsChanged() {
+        print("Scan results changed!")
+    }
+    
+    func onScanTimeOut() {
+        print("Scan timed out")
+    }
+    
+    func onScanError(error: String) {
+        print("Scan Error")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        bye()
+        whyNotWork()
+        
+        let palBle = PalBle()
+        palBle.setListener(listener: self)
+        palBle.startScan()
     }
 
     override func didReceiveMemoryWarning() {
